@@ -160,8 +160,15 @@
       <!-- Os produtos do JSON vão aparecer aqui -->
     </tbody>
   </table>
+  <div id="whatsapp-box" style="margin-top:20px; text-align:center;">
+  <label for="produto-select">Selecione uma peça:</label>
+  <select id="produto-select">
+    <option value="">-- escolha --</option>
+  </select>
+  <button id="whatsapp-btn">📲 Comprar pelo WhatsApp</button>
+</div>
 </section>
-  <footer class="site-footer">
+    <footer class="site-footer">
     <p>© <span id="year"></span> BelaDona Brechó • feito com ❤</p>
   </footer>
 
@@ -172,6 +179,7 @@
       const response = await fetch("produtos.json");
       const produtos = await response.json();
 
+      // Monta tabela
       const tbody = document.querySelector("#produtos-table tbody");
       tbody.innerHTML = "";
 
@@ -186,6 +194,30 @@
         `;
         tbody.appendChild(row);
       });
+
+      // Preenche o <select>
+      const select = document.getElementById("produto-select");
+      produtos.forEach(p => {
+        const option = document.createElement("option");
+        option.value = `${p.nome} - Tamanho: ${p.tamanho} (Busto: ${p.busto}, Cintura: ${p.cintura}, Quadril: ${p.quadril})`;
+        option.textContent = p.nome + " (" + p.tamanho + ")";
+        select.appendChild(option);
+      });
+
+      // Botão do WhatsApp
+      const whatsappBtn = document.getElementById("whatsapp-btn");
+      whatsappBtn.addEventListener("click", () => {
+        const produtoEscolhido = select.value;
+        if (!produtoEscolhido) {
+          alert("Escolha uma peça antes de continuar.");
+          return;
+        }
+        const mensagem = encodeURIComponent(
+          `Olá, tenho interesse na peça: ${produtoEscolhido}`
+        );
+        window.open(`https://wa.me/5511943819373?text=${mensagem}`, "_blank");
+      });
+
     } catch (error) {
       console.error("Erro ao carregar produtos:", error);
     }
