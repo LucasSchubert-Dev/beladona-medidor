@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BelaDona Brechó — Medidor de Medidas</title>
+
+  <!-- SEO básico -->
+  <meta name="description" content="Descubra seu tamanho ideal no BelaDona Brechó com nosso medidor de medidas. Compare suas medidas com nossas tabelas e encontre o melhor ajuste." />
+  <meta name="theme-color" content="#F6CAD9" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BelaDona Brechó — Medidor de Medidas" />
+  <meta property="og:description" content="Meça busto, cintura e quadril e veja seu tamanho ideal (PP–GG) e números BR." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo.png" />
+
+  <link rel="icon" href="assets/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo.png" alt="Logo BelaDona" class="logo" />
+      <div>
+        <h1>BelaDona Brechó</h1>
+        <p>Encontre seu tamanho perfeito ✨</p>
+      </div>
+    </div>
+    <nav class="top-nav">
+      <a href="#medidor">Medidor</a>
+      <a href="#tabelas">Tabelas</a>
+      <a href="#guia">Como medir</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h2>Descubra seu tamanho ideal</h2>
+      <p>Preencha suas medidas e compare com nossas tabelas (PP a GG e numeração BR).</p>
+      <a class="cta" href="#medidor">Começar a medir</a>
+    </section>
+
+    <!-- MEDIDOR -->
+    <section id="medidor" class="card">
+      <h3>Medidor de Medidas</h3>
+
+      <form id="measure-form">
+        <div class="unit-toggle">
+          <label><input type="radio" name="unit" value="cm" checked> cm</label>
+          <label><input type="radio" name="unit" value="in"> inches</label>
+        </div>
+
+        <div class="grid">
+          <label>Busto
+            <input type="number" step="0.1" min="60" max="140" id="bust" placeholder="ex: 90" required>
+          </label>
+          <label>Cintura
+            <input type="number" step="0.1" min="50" max="130" id="waist" placeholder="ex: 70" required>
+          </label>
+          <label>Quadril
+            <input type="number" step="0.1" min="70" max="150" id="hip" placeholder="ex: 98" required>
+          </label>
+          <label>Altura (opcional)
+            <input type="number" step="0.1" min="130" max="200" id="height" placeholder="ex: 165">
+          </label>
+          <label>Largura de ombro (opcional)
+            <input type="number" step="0.1" min="30" max="55" id="shoulder" placeholder="ex: 40">
+          </label>
+        </div>
+
+        <div class="buttons">
+          <button type="submit">Calcular tamanho</button>
+          <button type="button" id="save">Salvar minhas medidas</button>
+          <button type="button" id="clear">Limpar</button>
+        </div>
+      </form>
+
+      <div id="result" class="result"></div>
+      <small class="disclaimer">As tabelas são guias gerais. Marcas podem variar. Prefira sempre suas medidas ao número da etiqueta.</small>
+    </section>
+
+    <!-- TABELAS -->
+    <section id="tabelas" class="card">
+      <h3>Tabelas de tamanho (guia geral)</h3>
+
+      <div class="tables">
+        <table>
+          <caption>PP–GG (superior e vestidos)</caption>
+          <thead>
+            <tr><th>Tamanho</th><th>Busto (cm)</th><th>Cintura (cm)</th><th>Quadril (cm)</th></tr>
+          </thead>
+          <tbody id="tbl-tops"></tbody>
+        </table>
+
+        <table>
+          <caption>Numeração BR (calças/saia)</caption>
+          <thead>
+            <tr><th>BR</th><th>Cintura (cm)</th><th>Quadril (cm)</th></tr>
+          </thead>
+          <tbody id="tbl-bottoms"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- GUIA -->
+    <section id="guia" class="card">
+      <h3>Como tirar suas medidas</h3>
+      <div class="guide">
+        <svg viewBox="0 0 160 260" class="figure" aria-hidden="true">
+          <!-- Silhueta simples -->
+          <ellipse cx="80" cy="60" rx="26" ry="30" fill="#E8E8E8"/>
+          <rect x="60" y="90" width="40" height="80" rx="18" fill="#E8E8E8"/>
+          <rect x="55" y="170" width="50" height="70" rx="22" fill="#E8E8E8"/>
+          <!-- Linhas de medida -->
+          <line x1="40" y1="110" x2="120" y2="110" class="mline"/>
+          <line x1="35" y1="150" x2="125" y2="150" class="mline"/>
+          <line x1="30" y1="195" x2="130" y2="195" class="mline"/>
+          <text x="10" y="113">Busto</text>
+          <text x="10" y="153">Cintura</text>
+          <text x="10" y="198">Quadril</text>
+        </svg>
+
+        <ol>
+          <li><b>Busto:</b> fita passando pelo ponto mais cheio do busto, paralela ao chão.</li>
+          <li><b>Cintura:</b> parte mais estreita, normalmente acima do umbigo.</li>
+          <li><b>Quadril:</b> parte mais larga do quadril/glúteos.</li>
+          <li>Fique reta, respire normalmente e não aperte a fita.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="card">
+      <h3>Contato & Redes</h3>
+      <p>Quer ajuda para encontrar peças com suas medidas? Fale com a gente 💖</p>
+      <div class="social">
+        <a class="btn outline" href="https://wa.me/5599999999999?text=Oi%20BelaDona,%20minhas%20medidas%20são..." target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn outline" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn outline" href="mailto:contato@beladona.com.br">E-mail</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> BelaDona Brechó • feito com ❤</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
