@@ -18,6 +18,7 @@
   <link rel="icon" href="assets/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png">
 </head>
 <body>
   <header class="site-header">
@@ -168,7 +169,7 @@
   <button id="whatsapp-btn">📲 Comprar pelo WhatsApp</button>
 </div>
 </section>
-    <footer class="site-footer">
+      <footer class="site-footer">
     <p>© <span id="year"></span> BelaDona Brechó • feito com ❤</p>
   </footer>
 
@@ -179,7 +180,7 @@
       const response = await fetch("produtos.json");
       const produtos = await response.json();
 
-      // Monta tabela
+      // Monta tabela com botão WhatsApp em cada linha
       const tbody = document.querySelector("#produtos-table tbody");
       tbody.innerHTML = "";
 
@@ -191,31 +192,20 @@
           <td>${p.busto}</td>
           <td>${p.cintura}</td>
           <td>${p.quadril}</td>
+          <td>
+            <button class="btn-whatsapp">📲 Comprar</button>
+          </td>
         `;
+
+        // Adiciona evento no botão
+        row.querySelector(".btn-whatsapp").addEventListener("click", () => {
+          const mensagem = encodeURIComponent(
+            `Olá, tenho interesse na peça: ${p.nome} - Tamanho: ${p.tamanho} (Busto: ${p.busto}, Cintura: ${p.cintura}, Quadril: ${p.quadril})`
+          );
+          window.open(`https://wa.me/5511943819373?text=${mensagem}`, "_blank");
+        });
+
         tbody.appendChild(row);
-      });
-
-      // Preenche o <select>
-      const select = document.getElementById("produto-select");
-      produtos.forEach(p => {
-        const option = document.createElement("option");
-        option.value = `${p.nome} - Tamanho: ${p.tamanho} (Busto: ${p.busto}, Cintura: ${p.cintura}, Quadril: ${p.quadril})`;
-        option.textContent = p.nome + " (" + p.tamanho + ")";
-        select.appendChild(option);
-      });
-
-      // Botão do WhatsApp
-      const whatsappBtn = document.getElementById("whatsapp-btn");
-      whatsappBtn.addEventListener("click", () => {
-        const produtoEscolhido = select.value;
-        if (!produtoEscolhido) {
-          alert("Escolha uma peça antes de continuar.");
-          return;
-        }
-        const mensagem = encodeURIComponent(
-          `Olá, tenho interesse na peça: ${produtoEscolhido}`
-        );
-        window.open(`https://wa.me/5511943819373?text=${mensagem}`, "_blank");
       });
 
     } catch (error) {
