@@ -144,11 +144,54 @@
       </div>
     </section>
   </main>
-
+<section id="tabela-produtos" class="card-section">
+  <h2>Peças disponíveis</h2>
+  <table id="produtos-table" border="1" cellspacing="0" cellpadding="10">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Tamanho</th>
+        <th>Busto (cm)</th>
+        <th>Cintura (cm)</th>
+        <th>Quadril (cm)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Os produtos do JSON vão aparecer aqui -->
+    </tbody>
+  </table>
+</section>
   <footer class="site-footer">
     <p>© <span id="year"></span> BelaDona Brechó • feito com ❤</p>
   </footer>
 
   <script src="app.js"></script>
+  <script>
+  async function carregarProdutos() {
+    try {
+      const response = await fetch("produtos.json");
+      const produtos = await response.json();
+
+      const tbody = document.querySelector("#produtos-table tbody");
+      tbody.innerHTML = "";
+
+      produtos.forEach(p => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${p.nome}</td>
+          <td>${p.tamanho}</td>
+          <td>${p.busto}</td>
+          <td>${p.cintura}</td>
+          <td>${p.quadril}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar produtos:", error);
+    }
+  }
+
+  carregarProdutos();
+</script>
 </body>
 </html>
